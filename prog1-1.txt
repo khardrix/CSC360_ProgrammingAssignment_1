@@ -1,0 +1,20 @@
+create 01/31/2008
+outputmonth
+increment
+output
+create 12/12/1212
+output
+compare 12/13/1212
+increment
+compare 12/13/1212
+setyear 1200
+compare 12/13/1212
+create 13/13/1313
+create 01/45/2018
+create 05/16/2018
+increment
+outputmonth
+outputday
+outputyear
+setday four
+output

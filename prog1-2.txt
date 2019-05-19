@@ -1,0 +1,17 @@
+create 12/04/1993
+output
+increment
+output
+setday 31
+increment
+output
+setmonth april
+setday 22
+delete
+compare 12/22/1993
+compare 12/22/1994
+setyear 2000
+output
+increment
+create 12/29/1999
+increment
