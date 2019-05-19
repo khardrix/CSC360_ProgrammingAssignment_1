@@ -193,7 +193,14 @@ public class MyDate implements Comparable, Incrementable {
 
     public MyDate(String fullDate) throws IllegalDateException {
         if((!fullDate.substring(2, 3).equals("/")) || (!fullDate.substring(5, 6).equals("/"))){
-            throw new IllegalDateException();
+            throw new IllegalDateException("Bad date specified upon creation: You must input the date in the " +
+                    "format: \"xx/xx/xxxx\", with the \"x\"'s being integers.");
+        } else if((!Character.isDigit(fullDate.charAt(0))) || (!Character.isDigit(fullDate.charAt(1))) ||
+                (!Character.isDigit(fullDate.charAt(3))) || (!Character.isDigit(fullDate.charAt(4))) ||
+                (!Character.isDigit(fullDate.charAt(6))) || (!Character.isDigit(fullDate.charAt(7))) ||
+                (!Character.isDigit(fullDate.charAt(8))) || (!Character.isDigit(fullDate.charAt(9)))){
+            throw new IllegalDateException("Bad date specified upon creation: You input a character other than " +
+                    "a number as part of the date.");
         } else{
             String stringMonth = fullDate.substring(0, 2);
             String stringDay = fullDate.substring(3, 5);

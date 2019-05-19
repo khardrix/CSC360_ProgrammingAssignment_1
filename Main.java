@@ -258,7 +258,7 @@ public class Main {
             System.out.println("___________________________________________________________________");
 
 
-            MyDate date7 = new MyDate("02/29/1998");
+            MyDate date7 = new MyDate("0a/28/1998");
             System.out.println("\nDate 7: " + date6);
             System.out.println("Date 7 Month: " + date7.getMonth());
             System.out.print("Incrementing Date 7 (" + date7 + ") by one day: ");
