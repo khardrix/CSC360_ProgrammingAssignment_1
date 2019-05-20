@@ -1,10 +1,10 @@
 /*********************************************************************************************************************
  *********************************************************************************************************************
+ *****  Class: CSC-360-001-2019-040    Semester: Summer 2019    Professor: Richard Fox    Student: Ryan Huffman  *****
+ *****-----------------------------------------------------------------------------------------------------------*****
  *****                                       Programming Assignment #1                                           *****
+ *****                                        Object (Date) : MyDate                                             *****
  *****___________________________________________________________________________________________________________*****
- *****                                                                                                           *****
- *****   This assignment will test your ability to define your own Exception classes, use exception handling,    *****
- *****                               define an Interface and implement interfaces.                               *****
  *****                                                                                                           *****
  *****                      The basic idea of this assignment is to write your own Date class                    *****
  *****                     (since one exists in Java, call it something different like MyDate).                  *****
@@ -54,12 +54,7 @@
  *****     output it as two digits, however if the year is before 2000, then output the year in four digits,     *****
  *****                       so you get “03” for 2003, “18” for 2018 and “1998” for 1998.                        *****
  *****                                                                                                           *****
- *****                                                                                                           *****
- *****                         The IllegalDateException will require two constructors,                           *****
- *****                  a no-arg constructor which will simply do super(“some useful message”);                  *****
- *****                                   such as “Bad date specified”;                                           *****
- *****                                                                                                           *****
- *****                    and a 1-arg constructor which will pass on the message it receives.                    *****
+ *****                                                                                                           *****S
  *****   The IllegalDateException can be thrown from the MyDate constructor, setMonth and setDay methods only.   *****
  *****     In each case, throw a useful message such as “Bad Month: 13” or “Bad Day: there is no April 31”.      *****
  *****                                                                                                           *****
@@ -91,117 +86,76 @@
  *****                                 Again, ignore the possibility of leap years.                              *****
  *****                                                                                                           *****
  *****                                                                                                           *****
- *****     Once you have your Incrementable interface, IllegalDateException and MyDate classes implemented,      *****
- *****                            implement a user program to create and use a MyDate.                           *****
- *****               The program will open a text file and input a series of commands from the file.             *****
- *****                                     The commands will be of the form:                                     *****
- *****-----------------------------------------------------------------------------------------------------------*****
- *****                                                                                                           *****
- *****           create newdate – where newdate will be a String in the form “01/02/03”                          *****
- *****           setmonth newmonth – where newmonth will an int                                                  *****
- *****           setday day – where day will be an int                                                           *****
- *****           setyear year – where year will be an int (assumed to be 4 digits long as in 1998 or 2008)       *****
- *****           compare newDate – where newDate will be a String expressing another date,                       *****
- *****                             to handle this instruction, you will have to construct another MyDate with    *****
- *****                             this String and compare the current MyDate                                    *****
- *****           output – this will output the existing MyDate using its toString method                         *****
- *****           outputmonth – same but only the month using getMonth                                            *****
- *****           outputday – same but just the day using getDay                                                  *****
- *****           outputyear – same but just the year using getYear                                               *****
- *****           increment – this will invoke the increment method of the existing MyDate                        *****
- *****                                                                                                           *****
- *****-----------------------------------------------------------------------------------------------------------*****
- *****                         The input file will contain a series of such commands.                            *****
- *****                           For each command, parse the command itself and if                               *****
- *****                          the command is one that requires a second parameter                              *****
- *****                     (create, setmonth, setday, setyear, compare), input it as well.                       *****
- *****                If the command is create, set the MyDate variable to a new MyDate object,                  *****
- *****                                otherwise use the existing MyDate object.                                  *****
- *****                                       If the command is compare,                                          *****
- *****              then pass to the existing MyDate object the message compareTo(new MyDate(newDate)).          *****
- *****                                                                                                           *****
- *****                                                                                                           *****
- *****    Open the input file and use a while loop that iterates through the file using while(input.hasNext().   *****
- *****               Some of the commands will be erroneous (either an illegal command such as delete,           *****
- *****                                   or a misspelled command like creat).                                    *****
- *****           Upon receiving a String that is not a legal command, throw an IllegalCommandException.          *****
- *****                         This is another Exception class you will have to write.                           *****
- *****         Assume every legal command has correct parameters and illegal commands have no parameters.        *****
- *****                             The reason for this is to simplify your code.                                 *****
- *****                                                                                                           *****
- *****                                                                                                           *****
- *****                The IllegalCommandException should have a no-arg and a 1-arg constructor,                  *****
- *****  just like the IllegalDateException. In your user program, when you throw a new IllegalCommandException,  *****
- *****          the message should include that the input command was not known and include that command,        *****
- *****                as in “Illegal command input: incr”. Organize your user program as follows.                *****
- *****-----------------------------------------------------------------------------------------------------------*****
- *****                                                                                                           *****
- *****                    // any declarations                                                                    *****
- *****                    try {                                                                                  *****
- *****                        // open the input file here                                                        *****
- *****                        while(input.hasNext()) {                                                           *****
- *****                            try {                                                                          *****
- *****                                // get the next command and process it (e.g., call the appropriate         *****
- *****                                // method of your MyDate instance datum                                    *****
- *****                                If illegal, throw IllegalCommandException                                  *****
- *****                                If legal and has a parameter, input parameter                              *****
- *****                                Based on instruction, execute the appropriate MyDate method                *****
- *****                            }                                                                              *****
- *****                            catch blocks                                                                   *****
- *****                        }                                                                                  *****
- *****                    }                                                                                      *****
- *****                    catch(IOException) {…}                                                                 *****
- *****                                                                                                           *****
- *****-----------------------------------------------------------------------------------------------------------*****
- *****                 The catch blocks in the inner try should catch IllegalCommandException,                   *****
- *****               IllegalDateException and NumberFormatException (three separate catch blocks).               *****
- *****          The NumberFormatException block is used if an input is expected to be an int and is not.         *****
- *****                                   For instance, setMonth(“February”).                                     *****
- *****                                                                                                           *****
- *****                                                                                                           *****
- *****                After writing and compiling this second Exception class and your user class,               *****
- *****                   run the program on the two input files posted with this assignment.                     *****
- *****           The first input file also has the output that is expected for you to test your program.         *****
- *****               Once you have fully debugged your program and are getting the expected output,              *****
- *****       run it on the second input file, collect the output and submit all of your program code along       *****
- *****                                with the output from the second input file.                                *****
- *****                                                                                                           *****
- *****                                                                                                           *****
  *****     NOTE: when you examine my output, you will see that in my user class after incrementing the date,     *****
  *****          I also output the new date. Also, when comparing two dates, I output what the dates are.         *****
  *****                            These additions to the output are strictly optional.                           *****
- *****                                                                                                           *****
- *****                                                                                                           *****
- *****          Submission of this assignment should be by email to foxr@nku.edu by the listed due date.         *****
- *****             For convenience, please either place all files into a single zip file or copy and             *****
- *****      paste all code and output into a Word document. Make sure all of your code is well commented.        *****
  *********************************************************************************************************************
  *********************************************************************************************************************/
 
+
+// Object class created as my own version of the Java "Date" class.
 public class MyDate implements Comparable, Incrementable {
 
+    // States or fields or instance data of the MyDate class.
     private int month;
     private int day;
     private int year;
 
 
+
+    // No-Argument ("no-arg") constructor used to set the date to the date I created this class ("05/18/2019").
     public MyDate() {
         this.month = 5;
         this.day = 18;
         this.year = 2019;
     }
 
+
+    // 1-Argument ("1-arg") constructor that takes in a date in the from "xx/xx/xxxx".
+        // This 1-arg constructor checks for possible errors in the format of the passed in parameter date
+        // (String fullDate). This 1-arg constructor will throw an "IllegalDateException" if something is
+        // wrong with the format of the passed in String fullDate date parameter.
+        // If the String fullDate date parameter was input correctly. This 1-arg constructor will set
+        // the individual instance data to their respective int values.
     public MyDate(String fullDate) throws IllegalDateException {
-        if((!fullDate.substring(2, 3).equals("/")) || (!fullDate.substring(5, 6).equals("/"))){
+
+        // This if block checks that the String fullDate date parameter is in the correct form of "xx/xx/xxxx" and
+            // will throw an IllegalDateException if not.
+        if((!fullDate.substring(2, 3).equals("/")) || (!fullDate.substring(5, 6).equals("/"))) {
             throw new IllegalDateException("Bad date specified upon creation: You must input the date in the " +
                     "format: \"xx/xx/xxxx\", with the \"x\"'s being integers.");
-        } else if((!Character.isDigit(fullDate.charAt(0))) || (!Character.isDigit(fullDate.charAt(1))) ||
+        }
+
+        // This else if block checks that the length of the String fullDate date parameter is less than 11 characters
+            // long and will throw an IllegalDateException if not.
+        else if(fullDate.length() < 10){
+            throw new IllegalDateException("Bad date specified upon creation: You must input the date in the " +
+                    "format: \"xx/xx/xxxx\", with the \"x\"'s being integers." +
+                    "\nAny date with a year prior to 1000, needs to have \"0\"'s prepended, so that the " +
+                    "the year is given in four-digit format.");
+        }
+
+        // This else it block checks if the "x"'s in the "xx/xx/xxxx" date format are all integers and
+            // will throw an IllegalDateException if not.
+        else if((!Character.isDigit(fullDate.charAt(0))) || (!Character.isDigit(fullDate.charAt(1))) ||
                 (!Character.isDigit(fullDate.charAt(3))) || (!Character.isDigit(fullDate.charAt(4))) ||
                 (!Character.isDigit(fullDate.charAt(6))) || (!Character.isDigit(fullDate.charAt(7))) ||
-                (!Character.isDigit(fullDate.charAt(8))) || (!Character.isDigit(fullDate.charAt(9)))){
+                (!Character.isDigit(fullDate.charAt(8))) || (!Character.isDigit(fullDate.charAt(9)))) {
             throw new IllegalDateException("Bad date specified upon creation: You input a character other than " +
                     "a number as part of the date.");
-        } else{
+        }
+
+        // This else if block checks that the length of the String fullDate date parameter is not more than
+            // 10 characters long and will throw an IllegalDateException if it is. (Program not designed for dates
+            // after "12/31/9999"
+        else if(fullDate.length() > 10) {
+            throw new IllegalDateException("Bad date specified upon creation: This program was not designed " +
+                    "to handle dates after 12/31/9999");
+        }
+
+        // If the String fullDate date parameter passes all the previous checks, then this else block assigns
+            // the int values to their respective instance data.
+        else {
             String stringMonth = fullDate.substring(0, 2);
             String stringDay = fullDate.substring(3, 5);
             String stringYear = fullDate.substring(6);
@@ -212,9 +166,16 @@ public class MyDate implements Comparable, Incrementable {
         }
     }
 
+
+    // This accessor method converts the int value for "int month" into its respective String value and returns
+        // the String value.
+    // For example; 1 becomes "January", 2 becomes "February", 3 becomes "March" and so on.
     public String getMonth() {
+
+        // String variable used to store the String representation of the "int month" instance data.
         String stringMonth = null;
 
+        // Switch block used to assign the correct String to the "stringMonth" variable.
         switch (this.month) {
             case 1:
                 stringMonth = "January";
@@ -257,24 +218,50 @@ public class MyDate implements Comparable, Incrementable {
         return  stringMonth;
     }
 
+
+    // This accessor method returns the int value of month. It has the "private" modifier, because this method is only used
+        // in the compareTo() method implemented because of implementing the "Comparable" interface.
     private int getMonthAsInt(){
+
         return this.month;
     }
 
+
+    // This mutator method returns "true" if the "month" instance data was successfully set and
+        // throws an IllegalDateException if not.
     public boolean setMonth(int month) throws IllegalDateException {
+
+        // if block used to make sure the input month parameter is between 1 and 12 and throw
+            // an IllegalDateException if not.
         if((month < 1) || (month > 12)){
             throw new IllegalDateException("Bad Month: " + month);
-        } else{
+        }
+
+        // else block that assigns the month parameter to the "int month" instance data and then return "true".
+        else{
             this.month = month;
             return true;
         }
     }
 
+
+    // This accessor method returns the int value of the "int day" instance data.
     public int getDay() {
-        return day;
+
+        return this.day;
     }
 
+
+    // This mutator method sets the "int day" instance data after checking that the int day parameter is valid and
+        // then returns "true" if successful and throws an IllegalDateException if not.
     public boolean setDay(int day) throws IllegalDateException {
+
+        // This if block checks that when the "int month" instance data is set to any month that contains 31 days,
+            // the int day parameter is between 1 and 31. If int day is between 1 and 31 for these months,
+            // the "int day" instance data is set to the value of the int day parameter and
+            // return "true" to indicate the setting of the "int day" instance data was successful.
+            // If the int day parameter for these months is not between 1 and 31,
+            // this if block will throw an IllegalDateException
         if((this.month == 1) || (this.month == 3) || (this.month == 5) || (this.month == 7) || (this.month == 8) ||
                 (this.month == 10) || (this.month == 12)){
             if((day < 1) || (day > 31)){
@@ -283,6 +270,12 @@ public class MyDate implements Comparable, Incrementable {
                 this.day = day;
                 return true;
             }
+
+        // This else if block checks that for the int day parameter is between 1 and 28 when the "int month"
+            // instance data is equal to 2 (February) and return "true" to indicate the setting of the
+            // "int day" instance data was successful. If the int day parameter was not between 1 and 28, when
+            // the "int month" instance data was equal to 2 (February), this else if block will throw
+            // an IllegalDateException.
         } else if(this.month == 2){
             if((day < 1) || (day > 28)){
                 throw new IllegalDateException("Bad Day: there is no " + getMonth() + " " + day);
@@ -290,7 +283,13 @@ public class MyDate implements Comparable, Incrementable {
                 this.day = day;
                 return true;
             }
-        } else{
+        }
+
+        // This else block is used for all the months ("int month" instance data) that have 30 days,
+            // the int day parameter is between 1 and 30. If so, set the "int day" instance data to the
+            // value of the int day parameter and return "true" to indicate the setting of the
+            // "int day" instance data was successful. If not, throw an IllegalDateException.
+        else{
             if((day < 1) || (day > 30)){
                 throw new IllegalDateException("Bad Day: there is no " + getMonth() + " " + day);
             } else{
@@ -300,41 +299,97 @@ public class MyDate implements Comparable, Incrementable {
         }
     }
 
+
+    // This accessor method returns the int value of the "int year" instance data.
     public int getYear() {
-        return year;
+
+        return this.year;
     }
 
+
+    // This mutator method sets the int value of the "int year" instance data.
     public void setYear(int year) {
+
         this.year = year;
     }
 
+
+    // This overridden method is implemented because of implementing the Comparable interface.
+    // This method takes in an Object parameter (this is down-casted to a MyDate object) and
+        // compares it to another (the MyDate object that is calling this method).
+        // Then returns "1" if the MyDate object calling this method is newer,
+        // returns "-1" if the MyDate object calling this method is older
+        // and "0" if the MyDate object calling this method is the same date as the passed in MyDate object.
+    // This method also prints to the console, the result of the comparison.
     @Override
     public int compareTo(Object d) {
+
+        // Local variables used to store the int values for the month, day and year of the passed in MyDate parameter.
         int otherMonth = ((MyDate)d).getMonthAsInt();
         int otherDay = ((MyDate)d).getDay();
         int otherYear = ((MyDate)d).getYear();
 
+        // This if block is used to test if "int otherYear" is older (less than) than the "int year" value of the
+            // MyDate object that called the compareTo() method. If otherYear is older (less than),
+            // print the result to the console and return "1".
         if(this.year > otherYear){
             System.out.println(((MyDate)d).toString() + " is older than " + this.toString());
             return 1;
-        } else if(this.year < otherYear){
+        }
+
+        // This else if block is used to test if "int otherYear" is newer (greater than) than the "int year" value
+            // of the MyDate object that called the compareTo() method. If otherYear is newer (greater than),
+            // print the result to the console and return "-1".
+        else if(this.year < otherYear){
             System.out.println(((MyDate)d).toString() + " is newer than " + this.toString());
             return -1;
-        } else{
+        }
+
+        // This else block is used when otherYear is equal to the "int year" value of the MyDate object
+            // that called the compareTo() method.
+        else{
+
+            // This if block is used to test if "int otherMonth" is older (less than) than the "int month" value
+                // of the MyDate object that called the compareTo() method. If otherMonth is older (less than),
+                // print the result to the console and return "1".
             if(this.month > otherMonth){
                 System.out.println(((MyDate)d).toString() + " is older than " + this.toString());
                 return 1;
-            } else if(this.month < otherMonth){
+            }
+
+            // This else if block is used to test if "int otherMonth" is newer (greater than) than the "int month" value
+                // of the MyDate object that called the compareTo() method. If otherMonth is newer (greater than),
+                // print the result to the console and return "-1".
+            else if(this.month < otherMonth){
                 System.out.println(((MyDate)d).toString() + " is newer than " + this.toString());
                 return -1;
-            } else{
+            }
+
+            // This else block is used when otherMonth is equal to the "int month" value of the MyDate object
+                // that called the compareTo() method.
+            else{
+
+                // This if block is used to test if "int otherDay" is older (less than) than the "int day" value
+                    // of the MyDate object that called the compareTo() method. If otherDay is older (less than),
+                    // print the result to the console and return "1".
                 if(this.day > otherDay){
                     System.out.println(((MyDate)d).toString() + " is older than " + this.toString());
                     return 1;
-                }else if(this.day < otherDay){
+                }
+
+                // This else if block is used to test if "int otherDay" is newer (greater than) than the "int day"
+                    // value of the MyDate object that called the compareTo() method. If otherDay is newer
+                    // (greater than), print the result to the console and return "-1".
+                else if(this.day < otherDay){
                     System.out.println(((MyDate)d).toString() + " is newer than " + this.toString());
                     return -1;
-                }else{
+                }
+
+                // This else block is used when the MyDate object that called the compareTo() method and
+                    // the passed in MyDate object are completely equal.
+                // If this.year == otherYear, this.month == otherMonth and this.day == otherDay,
+                    // then the two dates are the same. Print the result to the console and return "0".
+                else{
                     System.out.println("The dates are equal.");
                     return 0;
                 }
@@ -342,28 +397,66 @@ public class MyDate implements Comparable, Incrementable {
         }
     }
 
+
+    // This overridden method is implemented because of implementing the Incrementable interface (which I wrote).
+    // This method correctly increments the date by one day.
     @Override
     public void increment() {
+
+        // Increases the value of the "int day" instance data by one.
         this.day++;
 
+        // This if block checks if the value of the "int month" instance data is equal to a month
+            // that has 31 days (excluding December, because incrementing the day in December, could result
+            // in incrementing the year).
         if((this.month == 1) || (this.month == 3) || (this.month == 5) || (this.month == 7) || (this.month == 8) ||
                 (this.month == 10)){
+
+            // This if block checks if incrementing the value of the instance data  "int day" raises the value of
+                // "int day" above 31. If so, set the value of the instance data "int day" to "1" and
+                // increase the value of the instance data "int month" by one.
             if(this.day > 31){
                 this.day = 1;
                 this.month++;
             }
-        } else if(this.month == 2){
+        }
+
+        // This else if block checks if the value of the "int month" instance data is equal to "2" (February),
+            // because February only has 28 days in it.
+        else if(this.month == 2){
+
+            // This if block checks if incrementing the value of the instance data "int day" raises the value of
+                // the instance data "int day" above 28. If so, set the value of the instance data "int day"
+                // to "1" and increase the value of the instance data "int month" by one.
             if(this.day > 28){
                 this.day = 1;
                 this.month++;
             }
-        } else if(this.month == 12){
+        }
+
+        // This else if block checks if the value of the instance data "int month" is equal to "12" (December),
+            // because if so, incrementing the value of the instance data "int day" could result in having to
+            // increment the value of the instance data "int year" by one.
+        else if(this.month == 12){
+
+            // This if block checks if incrementing the value of the instance data "int day" raises the value of
+                // the instance data "int day" above 31.
+                // If so, set the value of the instance data "int day" to "1",
+                // set the value of the instance data "int month" to "1" and
+                // increase the value of the instance data "int year" by one.
             if(this.day > 31){
                 this.day = 1;
                 this.month = 1;
                 this.year++;
             }
-        }else{
+        }
+
+        // This else block handles the months that have 30 days.
+        else{
+
+            // This if block checks if incrementing the value of the instance data "int day" raises the value of
+                // the instance data "int day" above 30. If so, set the value of the instance data "int day"
+                // to "1" and increase the value of the instance data "int month" by one.
             if(day > 30){
                 this.day = 1;
                 this.month++;
@@ -371,29 +464,45 @@ public class MyDate implements Comparable, Incrementable {
         }
     }
 
+
+    // This overridden method is used for when we print out a MyDate object, so it is in a form that is helpful.
     @Override
     public String toString() {
+
+        // Local String variables
         String monthS, dayS, yearS;
 
+        // This if block is used to prepend a "0" to any month less than 10 (October).
         if(this.month < 10){
             monthS = "0" + this.month;
         } else{
             monthS = String.valueOf(this.month);
         }
 
+        // This if block is used to prepend a "0" to any day less than 10.
         if(this.day < 10){
             dayS = "0" + this.day;
         } else{
             dayS = String.valueOf(this.day);
         }
 
+        // This if block is used to find out if the instance data "int year" is greater than or equal to 2000.
+            // If so, only print out the last two digits of the year.
         if(this.year >= 2000){
+
+            // This if block is used when the instance data "int year" is greater than or equal to 2000,
+                // but less than 2010. If the instance data "int year" is between 2000 and 2009, prepend a "0"
+                // to the last digit of the year.
             if(this.year % 2000 < 10){
                 yearS = "0" + String.valueOf(this.year % 2000);
             } else{
                 yearS = String.valueOf(this.year % 2000);
             }
-        } else{
+        }
+
+        // This else block makes it to where any year before the year 2000, is written out as four digits,
+            // instead of two.
+        else{
             yearS = String.valueOf(this.year);
         }
 
