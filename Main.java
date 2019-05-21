@@ -222,8 +222,9 @@ public class Main {
 
             boolean createNewDate = false;
 
-            while(input1.hasNext()){
+            while(input1.hasNext()) {
 
+                /*
                 if(input1.next().equals("create")){
                     myDateObjects.add(new MyDate(input1.next()));
                     current++;
@@ -231,11 +232,56 @@ public class Main {
 
                 if(input1.next().equals("outputmonth")){
                     System.out.println(myDateObjects.get(current).getMonth());
-                    // input1.nextLine();
+                }
+
+*/
+
+                words.add(input1.next());
+            }
+
+            for(int i = 0; i < words.size(); i++){
+                if(words.get(i).equals("create")){
+                    myDateObjects.add(new MyDate(words.get((i+1))));
+                    current++;
+                }
+
+                if(words.get(i).equals("outputmonth")){
+                    System.out.println(myDateObjects.get(current).getMonth());
+                }
+
+                if(words.get(i).equals("increment")){
+                    myDateObjects.get(current).increment();
+                }
+
+                if(words.get(i).equals("output")){
+                    System.out.println(myDateObjects.get(current));
+                }
+
+                if(words.get(i).equals("compare")){
+                    myDateObjects.add(new MyDate(words.get((i+1))));
+                    myDateObjects.get(current).compareTo(myDateObjects.get((current+1)));
+                    myDateObjects.remove((current+1));
+                }
+
+                if(words.get(i).equals("setyear")){
+                    myDateObjects.get(current).setYear(Integer.parseInt(words.get((i+1))));
+                }
+
+                if(words.get(i).equals("outputday")){
+                    System.out.println(myDateObjects.get(current).getDay());
+                }
+
+                if(words.get(i).equals("outputyear")){
+                    System.out.println(myDateObjects.get(current).getYear());
+                }
+
+                if(words.get(i).equals("setday")){
+                    myDateObjects.get(current).setDay(Integer.parseInt(words.get((i+1))));
                 }
             }
 
             System.out.println(myDateObjects);
+
 
         }
         catch(Exception e){
