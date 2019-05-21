@@ -178,99 +178,68 @@
  *********************************************************************************************************************
  *********************************************************************************************************************/
 
+// IMPORTS of needed tools and plug-ins
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
+        // String variables that hold input and output file pathways.
+        String input1FileName = "prog1-1.txt";
+        String input2FileName = "prog1-2.txt";
+        String output1FileName = "prog1-output1.txt";
+        String testOutputFileName = "test-Output.txt";
+
+        Scanner input1 = null;
+        Scanner input2 = null;
+        PrintWriter output = null;
+        PrintWriter testOutput = null;
+
         try{
-            MyDate date1 = new MyDate("12/31/1979");
-            System.out.println("Date 1: " + date1);
-            System.out.println("Date 1 Month: " + date1.getMonth());
-            System.out.print("Incrementing Date 1 (" + date1 + ") by one day: ");
-            date1.increment();
-            System.out.println(date1);
-            System.out.print("Incrementing Date 1 (" + date1 + ") by one day: ");
-            date1.increment();
-            System.out.println(date1 + "\n");
+            input1 = new Scanner(new File(input1FileName));
+            input2 = new Scanner(new File(input2FileName));
+            output = new PrintWriter(output1FileName);
+            testOutput = new PrintWriter(testOutputFileName);
 
-            MyDate date2 = new MyDate("10/21/1980");
-            System.out.println("Date 2: " + date2);
-            System.out.println("Date 2 Month: " + date2.getMonth());
-            System.out.print("Incrementing Date 2 (" + date2 + ") by one day: ");
-            date2.increment();
-            System.out.println(date2);
-            System.out.print("Incrementing Date 2 (" + date2 + ") by one day: ");
-            date2.increment();
-            System.out.println(date2 + "\n");
+            ArrayList<String> words = new ArrayList<>();
+            ArrayList<MyDate> myDateObjects = new ArrayList<>();
 
-            System.out.print("Date 1 compared to Date 2: ");
-            date1.compareTo(date2);
-            System.out.println("___________________________________________________________________");
+            int counter = 0;
+            int myDateNumber = 0;
 
+            int myDateMonth = 0;
+            int myDateDay = 0;
+            int myDateYear = 0;
+            int current = -1;
 
-            MyDate date3 = new MyDate("09/11/1998");
-            System.out.println("\nDate 3: " + date3);
-            System.out.println("Date 3 Month: " + date3.getMonth());
-            System.out.print("Incrementing Date 3 (" + date3 + ") by one day: ");
-            date3.increment();
-            System.out.println(date3);
-            System.out.print("Incrementing Date 3 (" + date3 + ") by one day: ");
-            date3.increment();
-            System.out.println(date3 + "\n");
+            String stringMonth = null;
+            String stringDay = null;
+            String stringYear = null;
+            String stringFullDate = null;
 
-            MyDate date4 = new MyDate();
-            System.out.println("Date 4: " + date4);
-            System.out.println("Date 4 Month: " + date4.getMonth());
-            System.out.print("Incrementing Date 4 (" + date4 + ") by one day: ");
-            date4.increment();
-            System.out.println(date4);
-            System.out.print("Incrementing Date 4 (" + date4 + ") by one day: ");
-            date4.increment();
-            System.out.println(date4 + "\n");
+            boolean createNewDate = false;
 
-            System.out.print("Date 3 compared to Date 4: ");
-            date3.compareTo(date4);
-            System.out.println("___________________________________________________________________");
+            while(input1.hasNext()){
 
+                if(input1.next().equals("create")){
+                    myDateObjects.add(new MyDate(input1.next()));
+                    current++;
+                }
 
-            MyDate date5 = new MyDate("01/11/1998");
-            System.out.println("\nDate 5: " + date5);
-            System.out.println("Date 5 Month: " + date5.getMonth());
-            System.out.print("Incrementing Date 5 (" + date5 + ") by one day: ");
-            date5.increment();
-            System.out.println(date5);
-            System.out.print("Incrementing Date 5 (" + date5 + ") by one day: ");
-            date5.increment();
-            System.out.println(date5 + "\n");
+                if(input1.next().equals("outputmonth")){
+                    System.out.println(myDateObjects.get(current).getMonth());
+                    // input1.nextLine();
+                }
+            }
 
-            MyDate date6 = new MyDate("02/11/1998");
-            System.out.println("Date 6: " + date6);
-            System.out.println("Date 6 Month: " + date6.getMonth());
-            System.out.print("Incrementing Date 6 (" + date6 + ") by one day: ");
-            date6.increment();
-            System.out.println(date6);
-            System.out.print("Incrementing Date 6 (" + date6 + ") by one day: ");
-            date6.increment();
-            System.out.println(date6 + "\n");
+            System.out.println(myDateObjects);
 
-            System.out.print("Date 5 compared to Date 6: ");
-            date5.compareTo(date6);
-            System.out.println("___________________________________________________________________");
-
-
-            MyDate date7 = new MyDate("0a/28/1998");
-            System.out.println("\nDate 7: " + date6);
-            System.out.println("Date 7 Month: " + date7.getMonth());
-            System.out.print("Incrementing Date 7 (" + date7 + ") by one day: ");
-            date7.increment();
-            System.out.println(date7);
-            System.out.print("Incrementing Date 7 (" + date7 + ") by one day: ");
-            date7.increment();
-            System.out.println(date7 + "\n");
-
-        } catch (IllegalDateException e){
-            System.out.println(e);
         }
-
+        catch(Exception e){
+            System.out.println("UH OH!!!!!!! THERE WAS AN ERROR!!!!!!!\n" + e);
+        }
     }
 }
