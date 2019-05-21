@@ -187,6 +187,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+/*
         // String variables that hold input and output file pathways.
         String input1FileName = "prog1-1.txt";
         String input2FileName = "prog1-2.txt";
@@ -198,13 +199,13 @@ public class Main {
         PrintWriter output = null;
         PrintWriter testOutput = null;
 
-        try{
+        MyDate tmpDate = null;
+
+        try {
             input1 = new Scanner(new File(input1FileName));
             input2 = new Scanner(new File(input2FileName));
             output = new PrintWriter(output1FileName);
             testOutput = new PrintWriter(testOutputFileName);
-
-            ArrayList<String> words = new ArrayList<>();
             ArrayList<MyDate> myDateObjects = new ArrayList<>();
 
             int counter = 0;
@@ -221,59 +222,136 @@ public class Main {
             String stringFullDate = null;
 
             boolean createNewDate = false;
-
-            while(input1.hasNext()) {
-
-                words.add(input1.next());
-            }
-
-            for(int i = 0; i < words.size(); i++){
-                if(words.get(i).equals("create")){
-                    myDateObjects.add(new MyDate(words.get((i+1))));
-                    current++;
-                }
-
-                if(words.get(i).equals("outputmonth")){
-                    System.out.println(myDateObjects.get(current).getMonth());
-                }
-
-                if(words.get(i).equals("increment")){
-                    myDateObjects.get(current).increment();
-                }
-
-                if(words.get(i).equals("output")){
-                    System.out.println(myDateObjects.get(current));
-                }
-
-                if(words.get(i).equals("compare")){
-                    myDateObjects.add(new MyDate(words.get((i+1))));
-                    myDateObjects.get(current).compareTo(myDateObjects.get((current+1)));
-                    myDateObjects.remove((current+1));
-                }
-
-                if(words.get(i).equals("setyear")){
-                    myDateObjects.get(current).setYear(Integer.parseInt(words.get((i+1))));
-                }
-
-                if(words.get(i).equals("outputday")){
-                    System.out.println(myDateObjects.get(current).getDay());
-                }
-
-                if(words.get(i).equals("outputyear")){
-                    System.out.println(myDateObjects.get(current).getYear());
-                }
-
-                if(words.get(i).equals("setday")){
-                    myDateObjects.get(current).setDay(Integer.parseInt(words.get((i+1))));
+            while (input1.hasNext()) {
+                String command = input1.next().trim();
+                try {
+                    if(command == null || command.isEmpty())
+                        break;
+                    else if (command.equalsIgnoreCase("create")) {
+                        tmpDate = new MyDate(input1.next());
+                        myDateObjects.add(tmpDate);
+                    } else if (command.equalsIgnoreCase("outputmonth")) {
+                        System.out.println("Month is " + tmpDate.getMonth());
+                    } else if (command.equalsIgnoreCase("increment")) {
+                        tmpDate.increment();
+                        System.out.println("Incrementing date to " + tmpDate.toString());
+                    } else if (command.equalsIgnoreCase("output")) {
+                        System.out.println("Date is " + tmpDate.toString());
+                    } else if (command.equalsIgnoreCase("compare")) {
+                        MyDate compareDate = new MyDate(input1.next());
+                        System.out.println(tmpDate.toString() + " compares  to " + compareDate.toString() + " as " + tmpDate.compareTo(compareDate));
+                    } else if (command.equalsIgnoreCase("setyear")) {
+                        tmpDate.setYear(Integer.valueOf(input1.next()));
+                    } else if (command.equalsIgnoreCase("outputday")) {
+                        System.out.println("Day is " + tmpDate.getDay());
+                    } else if (command.equalsIgnoreCase("outputyear")) {
+                        System.out.println("Year is " + tmpDate.getYear());
+                    } else if (command.equalsIgnoreCase("setday")) {
+                        tmpDate.setDay(Integer.valueOf(input1.next()));
+                    }
+                } catch (IllegalDateException e) {
+                    System.out.println("There was an error: " + e);
                 }
             }
 
-            System.out.println(myDateObjects);
-
-
+        } catch (Exception e) {
+            System.out.println("There was an error: " + e);
         }
-        catch(Exception e){
-            System.out.println("UH OH!!!!!!! THERE WAS AN ERROR!!!!!!!\n" + e);
+        */
+
+        // String variables that hold input and output file pathways.
+        String input1FileName = "prog1-1.txt";
+        String input2FileName = "prog1-2.txt";
+        String output1FileName = "prog1-output1.txt";
+        String testOutputFileName = "test-Output.txt";
+
+        String myDateParameter = null;
+
+        int current = -1;
+
+        Scanner input1 = null;
+        Scanner input2 = null;
+        PrintWriter output = null;
+        PrintWriter testOutput = null;
+
+        try {
+            input1 = new Scanner(new File(input1FileName));
+            input2 = new Scanner(new File(input2FileName));
+            // output = new PrintWriter(output1FileName);
+            testOutput = new PrintWriter(testOutputFileName);
+            ArrayList<MyDate> myDateObjects = new ArrayList<>();
+
+
+
+            while(input1.hasNext()){
+                String command = input1.next().trim();
+
+                try{
+                    if(command.isEmpty()) {
+                        break;
+                    } else if(command.equals("create")){
+                        myDateObjects.add(new MyDate(input1.next()));
+                        current++;
+                    } else if(command.equals("outputmonth")){
+                        testOutput.println(myDateObjects.get(current).getMonth());
+                    } else if(command.equals("increment")){
+                        myDateObjects.get(current).increment();
+                        testOutput.println("Incrementing date to " + myDateObjects.get(current));
+                    } else if(command.equals("output")){
+                        testOutput.println("Date is " + myDateObjects.get(current));
+                    } else if(command.equals("compare")){
+                        String tempDate = input1.next();
+                        testOutput.println(myDateObjects.get(current) + " compares to " +
+                                tempDate + " as " +
+                                myDateObjects.get(current).compareTo(new MyDate(tempDate)));
+                    } else if(command.equals("setyear")){
+                        myDateObjects.get(current).setYear(Integer.parseInt(input1.next()));
+                    } else if(command.equals("outputday")){
+                        testOutput.println(myDateObjects.get(current).getDay());
+                    } else if(command.equals("outputyear")){
+                        testOutput.println(myDateObjects.get(current).getYear());
+                    } else if(command.equals("setday")){
+                        if(input1.hasNextInt()){
+                            myDateObjects.get(current).setDay(Integer.parseInt(input1.next()));
+                        } else{
+                            input1.next();
+                            throw new NumberFormatException("You must enter integers only when trying to " +
+                                    "use the .setDay() method.");
+                        }
+                    }
+                    else {
+                        throw new IllegalCommandException(command + " is not a legal command.");
+                    }
+
+                }
+                catch(IllegalDateException datExc){
+                    // System.out.println(datExc);
+                    testOutput.print(datExc);
+                }
+                catch(IllegalCommandException cmdExc){
+                    System.out.println(cmdExc);
+                }
+                catch(NumberFormatException numExc){
+                    System.out.println(numExc);
+                }
+            }
+        }
+        catch(IOException ioE){
+            System.out.println(ioE);
+        }
+        finally {
+            if(input1 != null){
+                input1.close();
+            }
+            if(input2 != null){
+                input2.close();
+            }
+            if(output != null){
+                output.close();
+            }
+            if(testOutput != null){
+                testOutput.close();
+            }
         }
     }
 }

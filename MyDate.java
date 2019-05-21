@@ -215,7 +215,7 @@ public class MyDate implements Comparable, Incrementable {
                 break;
         }
 
-        return  stringMonth;
+        return "Month is " + stringMonth;
     }
 
 
@@ -234,7 +234,7 @@ public class MyDate implements Comparable, Incrementable {
         // if block used to make sure the input month parameter is between 1 and 12 and throw
             // an IllegalDateException if not.
         if((month < 1) || (month > 12)){
-            throw new IllegalDateException("Bad Month: " + month);
+            throw new IllegalDateException(": The month " + month + " is out of range");
         }
 
         // else block that assigns the month parameter to the "int month" instance data and then return "true".
