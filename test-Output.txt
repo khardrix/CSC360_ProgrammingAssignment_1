@@ -1,0 +1,16 @@
+Month is January
+Incrementing date to 02/01/08
+Date is 02/01/08
+Date is 12/12/1212
+12/12/1212 compares to 12/13/1212 as -1
+Incrementing date to 12/13/1212
+12/13/1212 compares to 12/13/1212 as 0
+12/13/1200 compares to 12/13/1212 as -1
+IllegalDateException: The month 13 is out of range
+IllegalDateException: The day 45 is not legal for the month of 1
+Incrementing date to 05/17/18
+Month is May
+Day is 17
+Year is 2018
+java.lang.NumberFormatException: For input string: "four"
+Date is 05/17/18
