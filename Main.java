@@ -187,20 +187,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-/*
         // String variables that hold input and output file pathways.
         String input1FileName = "prog1-1.txt";
         String input2FileName = "prog1-2.txt";
         String output1FileName = "prog1-output1.txt";
         String testOutputFileName = "test-Output.txt";
 
+        // int variable to keep track of the current MyDate object.
+        int current = -1;
+
+        // Scanner and PrintWriter variables for file input and output.
         Scanner input1 = null;
         Scanner input2 = null;
         PrintWriter output = null;
         PrintWriter testOutput = null;
 
-        MyDate tmpDate = null;
-
+        // try block to attempt to open and write to the selected files.
         try {
             input1 = new Scanner(new File(input1FileName));
             input2 = new Scanner(new File(input2FileName));
@@ -208,137 +210,149 @@ public class Main {
             testOutput = new PrintWriter(testOutputFileName);
             ArrayList<MyDate> myDateObjects = new ArrayList<>();
 
-            int counter = 0;
-            int myDateNumber = 0;
 
-            int myDateMonth = 0;
-            int myDateDay = 0;
-            int myDateYear = 0;
-            int current = -1;
-
-            String stringMonth = null;
-            String stringDay = null;
-            String stringYear = null;
-            String stringFullDate = null;
-
-            boolean createNewDate = false;
-            while (input1.hasNext()) {
-                String command = input1.next().trim();
-                try {
-                    if(command == null || command.isEmpty())
-                        break;
-                    else if (command.equalsIgnoreCase("create")) {
-                        tmpDate = new MyDate(input1.next());
-                        myDateObjects.add(tmpDate);
-                    } else if (command.equalsIgnoreCase("outputmonth")) {
-                        System.out.println("Month is " + tmpDate.getMonth());
-                    } else if (command.equalsIgnoreCase("increment")) {
-                        tmpDate.increment();
-                        System.out.println("Incrementing date to " + tmpDate.toString());
-                    } else if (command.equalsIgnoreCase("output")) {
-                        System.out.println("Date is " + tmpDate.toString());
-                    } else if (command.equalsIgnoreCase("compare")) {
-                        MyDate compareDate = new MyDate(input1.next());
-                        System.out.println(tmpDate.toString() + " compares  to " + compareDate.toString() + " as " + tmpDate.compareTo(compareDate));
-                    } else if (command.equalsIgnoreCase("setyear")) {
-                        tmpDate.setYear(Integer.valueOf(input1.next()));
-                    } else if (command.equalsIgnoreCase("outputday")) {
-                        System.out.println("Day is " + tmpDate.getDay());
-                    } else if (command.equalsIgnoreCase("outputyear")) {
-                        System.out.println("Year is " + tmpDate.getYear());
-                    } else if (command.equalsIgnoreCase("setday")) {
-                        tmpDate.setDay(Integer.valueOf(input1.next()));
-                    }
-                } catch (IllegalDateException e) {
-                    System.out.println("There was an error: " + e);
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("There was an error: " + e);
-        }
-        */
-
-        // String variables that hold input and output file pathways.
-        String input1FileName = "prog1-1.txt";
-        String input2FileName = "prog1-2.txt";
-        String output1FileName = "prog1-output1.txt";
-        String testOutputFileName = "test-Output.txt";
-
-        String myDateParameter = null;
-
-        int current = -1;
-
-        Scanner input1 = null;
-        Scanner input2 = null;
-        PrintWriter output = null;
-        PrintWriter testOutput = null;
-
-        try {
-            input1 = new Scanner(new File(input1FileName));
-            input2 = new Scanner(new File(input2FileName));
-            // output = new PrintWriter(output1FileName);
-            testOutput = new PrintWriter(testOutputFileName);
-            ArrayList<MyDate> myDateObjects = new ArrayList<>();
-
-
-
+            // while loop to go through the input file to execute commands.
             while(input1.hasNext()){
+                // String variable to hold the next String in the file and move the file forward one String.
                 String command = input1.next().trim();
 
+                // try block to attempt to execute the given commands and throw appropriate errors if not.
                 try{
+                    // If nothing is written, go back to the beginning of the while loop.
                     if(command.isEmpty()) {
                         break;
+
+                    // If the command is to "create", test that all input is legal and create a new MyDate object if so.
                     } else if(command.equals("create")){
-                        myDateObjects.add(new MyDate(input1.next()));
-                        current++;
-                    } else if(command.equals("outputmonth")){
+                        // String variable to hold the next String in the file and move the file forward one String.
+                        String temp = input1.next();
+
+                        // Variables to hold the integer values of the month and day for testing purposes.
+                        int month = Integer.parseInt(temp.substring(0, 2));
+                        int day = Integer.parseInt(temp.substring(3, 5));
+
+                        // if block to make sure the month variable is legal (between 1 and 12) and throw an
+                            // IllegalDateException if not.
+                        if((month < 1) || (month > 12)){
+                            throw new IllegalDateException("The month " + month + " is out of range");
+                        }
+
+                        // else if block to make sure the "day" given is a legal day for the months that have 31 days,
+                            // create a new MyDate object if so and throw an IllegalDateException if not.
+                        else if((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) ||
+                                (month == 10) || (month == 12)){
+                            if((day < 1) || (day > 31)){
+                                throw new IllegalDateException("The day " + day + " is not legal for the month of " + month);
+                            } else{
+                                myDateObjects.add(new MyDate(temp));
+                                current++;
+                            }
+                        }
+
+                        // else if block to make the "day" given is a legal day for February, which only has 28 days.
+                            // Create a new MyDate object if so and throw an IllegalDateException if not.
+                        else if(month == 2){
+                            if((day < 1) || (day > 28)){
+                                throw new IllegalDateException("The day " + day + " is not legal for the month of " + month);
+                            } else{
+                                myDateObjects.add(new MyDate(temp));
+                                current++;
+                            }
+                        }
+
+                        // else block to make the "day" given is a legal day for months that have 30 days, create a
+                            // new MyDate object if so and throw an IllegalDateException if not.
+                        else{
+                            if((day < 1) || (day > 30)){
+                                throw new IllegalDateException("The day " + day + " is not legal for the month of " + month);
+                            } else{
+                                myDateObjects.add(new MyDate(temp));
+                                current++;
+                            }
+                        }
+                    }
+
+                    // else if block to output the month in String form if the "command" is equal to "outputmonth".
+                    else if(command.equals("outputmonth")){
                         testOutput.println(myDateObjects.get(current).getMonth());
-                    } else if(command.equals("increment")){
+                    }
+
+                    // else if block to increment the day by one day if the "command" is equal to "increment".
+                    else if(command.equals("increment")){
                         myDateObjects.get(current).increment();
                         testOutput.println("Incrementing date to " + myDateObjects.get(current));
-                    } else if(command.equals("output")){
+                    }
+
+                    // else if block to output the date if the "command" is equal to "output".
+                    else if(command.equals("output")){
                         testOutput.println("Date is " + myDateObjects.get(current));
-                    } else if(command.equals("compare")){
+                    }
+
+                    // else if block to compare two dates if the "command" is equal to "compare".
+                    else if(command.equals("compare")){
                         String tempDate = input1.next();
                         testOutput.println(myDateObjects.get(current) + " compares to " +
                                 tempDate + " as " +
                                 myDateObjects.get(current).compareTo(new MyDate(tempDate)));
-                    } else if(command.equals("setyear")){
+                    }
+
+                    // else if block used to set the value of the year if the "command" is equal to "setyear".
+                    else if(command.equals("setyear")){
                         myDateObjects.get(current).setYear(Integer.parseInt(input1.next()));
-                    } else if(command.equals("outputday")){
-                        testOutput.println(myDateObjects.get(current).getDay());
-                    } else if(command.equals("outputyear")){
-                        testOutput.println(myDateObjects.get(current).getYear());
-                    } else if(command.equals("setday")){
-                        if(input1.hasNextInt()){
+                    }
+
+                    // else if block used to output the day if the "command" is equal to "outputday".
+                    else if(command.equals("outputday")){
+                        testOutput.println("Day is " + myDateObjects.get(current).getDay());
+                    }
+
+                    // else if block used to output the year if the "command" if equal to "outputyear".
+                    else if(command.equals("outputyear")){
+                        testOutput.println("Year is " + myDateObjects.get(current).getYear());
+                    }
+
+                    // else if block used to set the value for day if the "command" is equal to "setday". If the String
+                        // following the "setday" command is not an Integer, then throw a NumberFormatException.
+                    else if(command.equals("setday")){
+                        String temp = input1.next();
+                        if(Character.isDigit(Integer.parseInt(temp))){
                             myDateObjects.get(current).setDay(Integer.parseInt(input1.next()));
                         } else{
-                            input1.next();
-                            throw new NumberFormatException("You must enter integers only when trying to " +
-                                    "use the .setDay() method.");
+                            throw new NumberFormatException("For input string: \"" + temp + "\"");
                         }
                     }
+
+                    // else block used to throw an IllegalCommandException if the "command" is not one of the
+                        // predefined commands.
                     else {
-                        throw new IllegalCommandException(command + " is not a legal command.");
+                        throw new IllegalCommandException("\"" + command + "\" is not a legal command.");
                     }
 
                 }
+
+                // catch block used to execute an IllegalDateException and write it to the file.
                 catch(IllegalDateException datExc){
-                    // System.out.println(datExc);
-                    testOutput.print(datExc);
+                    testOutput.println(datExc);
                 }
+
+                // catch block used to execute an IllegalCommandException and write it to the file.
                 catch(IllegalCommandException cmdExc){
-                    System.out.println(cmdExc);
+                    testOutput.println(cmdExc);
                 }
+
+                // catch block used to execute a NumberFormatException and write it to the file.
                 catch(NumberFormatException numExc){
-                    System.out.println(numExc);
+                    testOutput.println(numExc);
                 }
             }
         }
+
+        // catch block used for when the file will not open successfully.
         catch(IOException ioE){
             System.out.println(ioE);
         }
+
+        // finally block used to close all the files after testing that the files were opened in the first place.
         finally {
             if(input1 != null){
                 input1.close();

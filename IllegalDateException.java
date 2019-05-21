@@ -27,12 +27,11 @@ public class IllegalDateException extends Exception {
     // This no-arg constructor also prints "Bad date specified" to the console.
     public IllegalDateException(){
         super("Bad date specified");
-        System.out.println("Bad date specified");
     }
 
     // A 1-argument constructor to take in an error message.
         // Then, print that passed in String error message to the console.
     public IllegalDateException(String message){
-        System.out.println(message);
+        super(message);
     }
 }

@@ -55,12 +55,11 @@ public class IllegalCommandException extends Exception {
     // This no-arg constructor also prints "Illegal command input" to the console.
     public IllegalCommandException(){
         super("Illegal command input");
-        System.out.println("Illegal command input");
     }
 
     // A 1-argument constructor to take in an error message.
         // Then, print that passed in String error message to the console.
     public IllegalCommandException(String message){
-        System.out.println("Illegal command input: " + message);
+        super(message);
     }
 }

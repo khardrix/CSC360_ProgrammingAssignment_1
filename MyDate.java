@@ -234,7 +234,7 @@ public class MyDate implements Comparable, Incrementable {
         // if block used to make sure the input month parameter is between 1 and 12 and throw
             // an IllegalDateException if not.
         if((month < 1) || (month > 12)){
-            throw new IllegalDateException(": The month " + month + " is out of range");
+            throw new IllegalDateException("IllegalDateException: The month " + month + " is out of range");
         }
 
         // else block that assigns the month parameter to the "int month" instance data and then return "true".
@@ -265,7 +265,8 @@ public class MyDate implements Comparable, Incrementable {
         if((this.month == 1) || (this.month == 3) || (this.month == 5) || (this.month == 7) || (this.month == 8) ||
                 (this.month == 10) || (this.month == 12)){
             if((day < 1) || (day > 31)){
-                throw new IllegalDateException("Bad Day: there is no " + getMonth() + " " + day);
+                throw new IllegalDateException("IllegalDateException: The day " + day + " is not legal for the " +
+                        "month of " + this.month);
             } else{
                 this.day = day;
                 return true;
