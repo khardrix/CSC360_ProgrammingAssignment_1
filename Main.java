@@ -188,7 +188,9 @@ public class Main {
     public static void main(String[] args) {
 
         // String variables that hold input and output file pathways.
-        String input1FileName = "prog1-1.txt";
+        // String input1FileName = "prog1-1.txt";
+        // String input2FileName = "prog1-2.txt";
+        String input1FileName = "prog1-2.txt";
         String input2FileName = "prog1-2.txt";
         String output1FileName = "prog1-output1.txt";
         String testOutputFileName = "test-Output.txt";
