@@ -224,18 +224,6 @@ public class Main {
 
             while(input1.hasNext()) {
 
-                /*
-                if(input1.next().equals("create")){
-                    myDateObjects.add(new MyDate(input1.next()));
-                    current++;
-                }
-
-                if(input1.next().equals("outputmonth")){
-                    System.out.println(myDateObjects.get(current).getMonth());
-                }
-
-*/
-
                 words.add(input1.next());
             }
 
