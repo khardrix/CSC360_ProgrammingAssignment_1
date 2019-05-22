@@ -15,3 +15,22 @@ output
 increment
 create 12/29/1999
 increment
+output
+increment
+increment
+output
+setmonth 13
+setmonth 2
+outputmouth
+outputmonth
+create 01/01/2001
+increment
+compare 01/02/2002
+setday 31
+increment
+setmonth 3
+setday ten
+incrament
+create 02/28/2154
+increment
+output

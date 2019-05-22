@@ -16,7 +16,7 @@ Incrementing date to 01/01/00
 Date is 01/01/00
 IllegalDateException: The month 13 is out of range
 IllegalCommandException: "outputmouth" is not a legal command.
-Month is February
+02/01/00
 Incrementing date to 01/02/01
 01/02/01 compares to 01/02/2002 as -1
 Incrementing date to 02/01/01

@@ -182,7 +182,6 @@
 
 // IMPORTS of needed tools and plug-ins
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -194,9 +193,6 @@ public class Main {
         String input2FileName = "prog1-2.txt";
         String output1FileName = "prog1-output1.txt";
         String output2FileName = "prog1-output2.txt";
-
-        // int variable to keep track of the current MyDate object.
-        int current = -1;
 
         // Scanner and PrintWriter variables for file input and output.
         Scanner input1 = null;
@@ -210,7 +206,6 @@ public class Main {
             input2 = new Scanner(new File(input2FileName));
             output1 = new PrintWriter(output1FileName);
             output2 = new PrintWriter(output2FileName);
-            ArrayList<MyDate> myDateObjects = new ArrayList<>();
 
             MyDate myDate = null;
 
