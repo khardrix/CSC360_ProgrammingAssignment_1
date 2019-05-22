@@ -160,9 +160,51 @@ public class MyDate implements Comparable, Incrementable {
             String stringDay = fullDate.substring(3, 5);
             String stringYear = fullDate.substring(6);
 
-            setMonth(Integer.parseInt(stringMonth));
-            setDay(Integer.parseInt(stringDay));
-            this.year = Integer.parseInt(stringYear);
+            int testMonth = Integer.parseInt(stringMonth);
+            int testDay = Integer.parseInt(stringDay);
+
+            // if block to make sure the month variable is legal (between 1 and 12) and throw an
+            // IllegalDateException if not.
+            if((testMonth < 1) || (testMonth > 12)){
+                throw new IllegalDateException("The month " + testMonth + " is out of range");
+            }
+
+            // else if block to make sure the "day" given is a legal day for the months that have 31 days,
+            // create a new MyDate object if so and throw an IllegalDateException if not.
+            else if((testMonth == 1) || (testMonth == 3) || (testMonth == 5) || (testMonth == 7) || (testMonth == 8) ||
+                    (testMonth == 10) || (testMonth == 12)){
+                if((testDay < 1) || (testDay > 31)){
+                    throw new IllegalDateException("The day " + testDay + " is not legal for the month of " + testMonth);
+                } else{
+                    setMonth(testMonth);
+                    setDay(testDay);
+                    this.year = Integer.parseInt(stringYear);
+                }
+            }
+
+            // else if block to make the "day" given is a legal day for February, which only has 28 days.
+            // Create a new MyDate object if so and throw an IllegalDateException if not.
+            else if(testMonth == 2){
+                if((testDay < 1) || (testDay > 28)){
+                    throw new IllegalDateException("The day " + testDay + " is not legal for the month of " + testMonth);
+                } else{
+                    setMonth(testMonth);
+                    setDay(testDay);
+                    this.year = Integer.parseInt(stringYear);
+                }
+            }
+
+            // else block to make the "day" given is a legal day for months that have 30 days, create a
+            // new MyDate object if so and throw an IllegalDateException if not.
+            else{
+                if((testDay < 1) || (testDay > 30)){
+                    throw new IllegalDateException("The day " + testDay + " is not legal for the month of " + testMonth);
+                } else{
+                    setMonth(testMonth);
+                    setDay(testDay);
+                    this.year = Integer.parseInt(stringYear);
+                }
+            }
         }
     }
 
@@ -234,7 +276,7 @@ public class MyDate implements Comparable, Incrementable {
         // if block used to make sure the input month parameter is between 1 and 12 and throw
             // an IllegalDateException if not.
         if((month < 1) || (month > 12)){
-            throw new IllegalDateException("IllegalDateException: The month " + month + " is out of range");
+            throw new IllegalDateException("The month " + month + " is out of range");
         }
 
         // else block that assigns the month parameter to the "int month" instance data and then return "true".

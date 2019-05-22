@@ -1,5 +1,7 @@
 /*********************************************************************************************************************
  *********************************************************************************************************************
+ *****  Class: CSC-360-001-2019-040    Semester: Summer 2019    Professor: Richard Fox    Student: Ryan Huffman  *****
+ *****-----------------------------------------------------------------------------------------------------------*****
  *****                                       Programming Assignment #1                                           *****
  *****___________________________________________________________________________________________________________*****
  *****                                                                                                           *****
@@ -210,6 +212,8 @@ public class Main {
             output2 = new PrintWriter(output2FileName);
             ArrayList<MyDate> myDateObjects = new ArrayList<>();
 
+            MyDate myDate = null;
+
 
             // while loop to go through the input file to execute commands.
             while(input2.hasNext()){
@@ -227,88 +231,46 @@ public class Main {
                         // String variable to hold the next String in the file and move the file forward one String.
                         String temp = input2.next();
 
-                        // Variables to hold the integer values of the month and day for testing purposes.
-                        int month = Integer.parseInt(temp.substring(0, 2));
-                        int day = Integer.parseInt(temp.substring(3, 5));
-
-                        // if block to make sure the month variable is legal (between 1 and 12) and throw an
-                            // IllegalDateException if not.
-                        if((month < 1) || (month > 12)){
-                            throw new IllegalDateException("The month " + month + " is out of range");
-                        }
-
-                        // else if block to make sure the "day" given is a legal day for the months that have 31 days,
-                            // create a new MyDate object if so and throw an IllegalDateException if not.
-                        else if((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) ||
-                                (month == 10) || (month == 12)){
-                            if((day < 1) || (day > 31)){
-                                throw new IllegalDateException("The day " + day + " is not legal for the month of " + month);
-                            } else{
-                                myDateObjects.add(new MyDate(temp));
-                                current++;
-                            }
-                        }
-
-                        // else if block to make the "day" given is a legal day for February, which only has 28 days.
-                            // Create a new MyDate object if so and throw an IllegalDateException if not.
-                        else if(month == 2){
-                            if((day < 1) || (day > 28)){
-                                throw new IllegalDateException("The day " + day + " is not legal for the month of " + month);
-                            } else{
-                                myDateObjects.add(new MyDate(temp));
-                                current++;
-                            }
-                        }
-
-                        // else block to make the "day" given is a legal day for months that have 30 days, create a
-                            // new MyDate object if so and throw an IllegalDateException if not.
-                        else{
-                            if((day < 1) || (day > 30)){
-                                throw new IllegalDateException("The day " + day + " is not legal for the month of " + month);
-                            } else{
-                                myDateObjects.add(new MyDate(temp));
-                                current++;
-                            }
-                        }
+                        myDate = new MyDate(temp);
                     }
 
                     // else if block to output the month in String form if the "command" is equal to "outputmonth".
                     else if(command.equals("outputmonth")){
-                        output2.println(myDateObjects.get(current).getMonth());
+                        output2.println(myDate);
                     }
 
                     // else if block to increment the day by one day if the "command" is equal to "increment".
                     else if(command.equals("increment")){
-                        myDateObjects.get(current).increment();
-                        output2.println("Incrementing date to " + myDateObjects.get(current));
+                        myDate.increment();
+                        output2.println("Incrementing date to " + myDate);
                     }
 
                     // else if block to output the date if the "command" is equal to "output".
                     else if(command.equals("output")){
-                        output2.println("Date is " + myDateObjects.get(current));
+                        output2.println("Date is " + myDate);
                     }
 
                     // else if block to compare two dates if the "command" is equal to "compare".
                     else if(command.equals("compare")){
                         String tempDate = input2.next();
-                        output2.println(myDateObjects.get(current) + " compares to " +
+                        output2.println(myDate + " compares to " +
                                 tempDate + " as " +
-                                myDateObjects.get(current).compareTo(new MyDate(tempDate)));
+                                myDate.compareTo(new MyDate(tempDate)));
                     }
 
                     // else if block used to set the value of the year if the "command" is equal to "setyear".
                     else if(command.equals("setyear")){
-                        myDateObjects.get(current).setYear(Integer.parseInt(input2.next()));
+                        myDate.setYear(Integer.parseInt(input2.next()));
                     }
 
                     // else if block used to output the day if the "command" is equal to "outputday".
                     else if(command.equals("outputday")){
-                        output2.println("Day is " + myDateObjects.get(current).getDay());
+                        output2.println("Day is " + myDate.getDay());
                     }
 
                     // else if block used to output the year if the "command" if equal to "outputyear".
                     else if(command.equals("outputyear")){
-                        output2.println("Year is " + myDateObjects.get(current).getYear());
+                        output2.println("Year is " + myDate.getYear());
                     }
 
                     // else if block used to set the value for day if the "command" is equal to "setday". If the String
@@ -316,7 +278,7 @@ public class Main {
                     else if(command.equals("setday")){
                         String temp = input2.next();
                         if(allDigits(temp)){
-                            myDateObjects.get(current).setDay(Integer.parseInt(temp));
+                            myDate.setDay(Integer.parseInt(temp));
                         } else{
                             throw new NumberFormatException("For input string: \"" + temp + "\"");
                         }
@@ -328,13 +290,7 @@ public class Main {
                     else if(command.equals("setmonth")){
                         String temp = input2.next();
                         if(allDigits(temp)){
-                            int month = Integer.parseInt(temp);
-
-                            if((month >= 1) && (month <= 12)){
-                                myDateObjects.get(current).setMonth(month);
-                            } else{
-                                throw new IllegalDateException("The month " + month + " is out of range");
-                            }
+                            myDate.setMonth(Integer.parseInt(temp));
                         } else{
                             throw new NumberFormatException("For input string: \"" + temp + "\"");
                         }
