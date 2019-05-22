@@ -332,17 +332,15 @@ public class MyDate implements Comparable, Incrementable {
 
         // This if block is used to test if "int otherYear" is older (less than) than the "int year" value of the
             // MyDate object that called the compareTo() method. If otherYear is older (less than),
-            // print the result to the console and return "1".
+            // and return "1".
         if(this.year > otherYear){
-            System.out.println(((MyDate)d).toString() + " is older than " + this.toString());
             return 1;
         }
 
         // This else if block is used to test if "int otherYear" is newer (greater than) than the "int year" value
             // of the MyDate object that called the compareTo() method. If otherYear is newer (greater than),
-            // print the result to the console and return "-1".
+            // and return "-1".
         else if(this.year < otherYear){
-            System.out.println(((MyDate)d).toString() + " is newer than " + this.toString());
             return -1;
         }
 
@@ -352,17 +350,15 @@ public class MyDate implements Comparable, Incrementable {
 
             // This if block is used to test if "int otherMonth" is older (less than) than the "int month" value
                 // of the MyDate object that called the compareTo() method. If otherMonth is older (less than),
-                // print the result to the console and return "1".
+                // and return "1".
             if(this.month > otherMonth){
-                System.out.println(((MyDate)d).toString() + " is older than " + this.toString());
                 return 1;
             }
 
             // This else if block is used to test if "int otherMonth" is newer (greater than) than the "int month" value
                 // of the MyDate object that called the compareTo() method. If otherMonth is newer (greater than),
-                // print the result to the console and return "-1".
+                // and return "-1".
             else if(this.month < otherMonth){
-                System.out.println(((MyDate)d).toString() + " is newer than " + this.toString());
                 return -1;
             }
 
@@ -372,26 +368,23 @@ public class MyDate implements Comparable, Incrementable {
 
                 // This if block is used to test if "int otherDay" is older (less than) than the "int day" value
                     // of the MyDate object that called the compareTo() method. If otherDay is older (less than),
-                    // print the result to the console and return "1".
+                    // and return "1".
                 if(this.day > otherDay){
-                    System.out.println(((MyDate)d).toString() + " is older than " + this.toString());
                     return 1;
                 }
 
                 // This else if block is used to test if "int otherDay" is newer (greater than) than the "int day"
                     // value of the MyDate object that called the compareTo() method. If otherDay is newer
-                    // (greater than), print the result to the console and return "-1".
+                    // (greater than), and return "-1".
                 else if(this.day < otherDay){
-                    System.out.println(((MyDate)d).toString() + " is newer than " + this.toString());
                     return -1;
                 }
 
                 // This else block is used when the MyDate object that called the compareTo() method and
                     // the passed in MyDate object are completely equal.
                 // If this.year == otherYear, this.month == otherMonth and this.day == otherDay,
-                    // then the two dates are the same. Print the result to the console and return "0".
+                    // then the two dates are the same. and return "0".
                 else{
-                    System.out.println("The dates are equal.");
                     return 0;
                 }
             }
@@ -489,7 +482,7 @@ public class MyDate implements Comparable, Incrementable {
 
         // This if block is used to find out if the instance data "int year" is greater than or equal to 2000.
             // If so, only print out the last two digits of the year.
-        if(this.year >= 2000){
+        if((this.year >= 2000) && (this.year < 2100)){
 
             // This if block is used when the instance data "int year" is greater than or equal to 2000,
                 // but less than 2010. If the instance data "int year" is between 2000 and 2009, prepend a "0"
@@ -501,8 +494,8 @@ public class MyDate implements Comparable, Incrementable {
             }
         }
 
-        // This else block makes it to where any year before the year 2000, is written out as four digits,
-            // instead of two.
+        // This else block makes it to where any year before the year 2000 or after the 2099,
+            // is written out as four digits, instead of two.
         else{
             yearS = String.valueOf(this.year);
         }

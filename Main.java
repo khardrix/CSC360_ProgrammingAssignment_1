@@ -188,12 +188,10 @@ public class Main {
     public static void main(String[] args) {
 
         // String variables that hold input and output file pathways.
-        // String input1FileName = "prog1-1.txt";
-        // String input2FileName = "prog1-2.txt";
-        String input1FileName = "prog1-2.txt";
+        String input1FileName = "prog1-1.txt";
         String input2FileName = "prog1-2.txt";
         String output1FileName = "prog1-output1.txt";
-        String testOutputFileName = "test-Output2.txt";
+        String output2FileName = "prog1-output2.txt";
 
         // int variable to keep track of the current MyDate object.
         int current = -1;
@@ -201,22 +199,22 @@ public class Main {
         // Scanner and PrintWriter variables for file input and output.
         Scanner input1 = null;
         Scanner input2 = null;
-        PrintWriter output = null;
-        PrintWriter testOutput = null;
+        PrintWriter output1 = null;
+        PrintWriter output2 = null;
 
         // try block to attempt to open and write to the selected files.
         try {
             input1 = new Scanner(new File(input1FileName));
             input2 = new Scanner(new File(input2FileName));
-            output = new PrintWriter(output1FileName);
-            testOutput = new PrintWriter(testOutputFileName);
+            output1 = new PrintWriter(output1FileName);
+            output2 = new PrintWriter(output2FileName);
             ArrayList<MyDate> myDateObjects = new ArrayList<>();
 
 
             // while loop to go through the input file to execute commands.
-            while(input1.hasNext()){
+            while(input2.hasNext()){
                 // String variable to hold the next String in the file and move the file forward one String.
-                String command = input1.next().trim();
+                String command = input2.next().trim();
 
                 // try block to attempt to execute the given commands and throw appropriate errors if not.
                 try{
@@ -227,7 +225,7 @@ public class Main {
                     // If the command is to "create", test that all input is legal and create a new MyDate object if so.
                     } else if(command.equals("create")){
                         // String variable to hold the next String in the file and move the file forward one String.
-                        String temp = input1.next();
+                        String temp = input2.next();
 
                         // Variables to hold the integer values of the month and day for testing purposes.
                         int month = Integer.parseInt(temp.substring(0, 2));
@@ -276,47 +274,47 @@ public class Main {
 
                     // else if block to output the month in String form if the "command" is equal to "outputmonth".
                     else if(command.equals("outputmonth")){
-                        testOutput.println(myDateObjects.get(current).getMonth());
+                        output2.println(myDateObjects.get(current).getMonth());
                     }
 
                     // else if block to increment the day by one day if the "command" is equal to "increment".
                     else if(command.equals("increment")){
                         myDateObjects.get(current).increment();
-                        testOutput.println("Incrementing date to " + myDateObjects.get(current));
+                        output2.println("Incrementing date to " + myDateObjects.get(current));
                     }
 
                     // else if block to output the date if the "command" is equal to "output".
                     else if(command.equals("output")){
-                        testOutput.println("Date is " + myDateObjects.get(current));
+                        output2.println("Date is " + myDateObjects.get(current));
                     }
 
                     // else if block to compare two dates if the "command" is equal to "compare".
                     else if(command.equals("compare")){
-                        String tempDate = input1.next();
-                        testOutput.println(myDateObjects.get(current) + " compares to " +
+                        String tempDate = input2.next();
+                        output2.println(myDateObjects.get(current) + " compares to " +
                                 tempDate + " as " +
                                 myDateObjects.get(current).compareTo(new MyDate(tempDate)));
                     }
 
                     // else if block used to set the value of the year if the "command" is equal to "setyear".
                     else if(command.equals("setyear")){
-                        myDateObjects.get(current).setYear(Integer.parseInt(input1.next()));
+                        myDateObjects.get(current).setYear(Integer.parseInt(input2.next()));
                     }
 
                     // else if block used to output the day if the "command" is equal to "outputday".
                     else if(command.equals("outputday")){
-                        testOutput.println("Day is " + myDateObjects.get(current).getDay());
+                        output2.println("Day is " + myDateObjects.get(current).getDay());
                     }
 
                     // else if block used to output the year if the "command" if equal to "outputyear".
                     else if(command.equals("outputyear")){
-                        testOutput.println("Year is " + myDateObjects.get(current).getYear());
+                        output2.println("Year is " + myDateObjects.get(current).getYear());
                     }
 
                     // else if block used to set the value for day if the "command" is equal to "setday". If the String
                         // following the "setday" command is not an Integer, then throw a NumberFormatException.
                     else if(command.equals("setday")){
-                        String temp = input1.next();
+                        String temp = input2.next();
                         if(allDigits(temp)){
                             myDateObjects.get(current).setDay(Integer.parseInt(temp));
                         } else{
@@ -328,7 +326,7 @@ public class Main {
                         // String following the "setmonth" command is not an Integer,
                         // then throw a NumberFormatException.
                     else if(command.equals("setmonth")){
-                        String temp = input1.next();
+                        String temp = input2.next();
                         if(allDigits(temp)){
                             int month = Integer.parseInt(temp);
 
@@ -352,17 +350,17 @@ public class Main {
 
                 // catch block used to execute an IllegalDateException and write it to the file.
                 catch(IllegalDateException datExc){
-                    testOutput.println(datExc);
+                    output2.println(datExc);
                 }
 
                 // catch block used to execute an IllegalCommandException and write it to the file.
                 catch(IllegalCommandException cmdExc){
-                    testOutput.println(cmdExc);
+                    output2.println(cmdExc);
                 }
 
                 // catch block used to execute a NumberFormatException and write it to the file.
                 catch(NumberFormatException numExc){
-                    testOutput.println(numExc);
+                    output2.println(numExc);
                 }
             }
         }
@@ -380,16 +378,17 @@ public class Main {
             if(input2 != null){
                 input2.close();
             }
-            if(output != null){
-                output.close();
+            if(output1 != null){
+                output1.close();
             }
-            if(testOutput != null){
-                testOutput.close();
+            if(output2 != null){
+                output2.close();
             }
         }
     }
 
 
+    // boolean method to return whether a String is made up entirely of integers.
     private static boolean allDigits(String str){
 
         // boolean variable to find out if the passed in string contains only integers.

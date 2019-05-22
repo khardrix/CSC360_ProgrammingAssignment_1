@@ -1,0 +1,26 @@
+Date is 12/04/1993
+Incrementing date to 12/05/1993
+Date is 12/05/1993
+Incrementing date to 01/01/1994
+Date is 01/01/1994
+java.lang.NumberFormatException: For input string: "april"
+IllegalCommandException: "delete" is not a legal command.
+01/22/1994 compares to 12/22/1993 as 1
+01/22/1994 compares to 12/22/1994 as -1
+Date is 01/22/00
+Incrementing date to 01/23/00
+Incrementing date to 12/30/1999
+Date is 12/30/1999
+Incrementing date to 12/31/1999
+Incrementing date to 01/01/00
+Date is 01/01/00
+IllegalDateException: The month 13 is out of range
+IllegalCommandException: "outputmouth" is not a legal command.
+Month is February
+Incrementing date to 01/02/01
+01/02/01 compares to 01/02/2002 as -1
+Incrementing date to 02/01/01
+java.lang.NumberFormatException: For input string: "ten"
+IllegalCommandException: "incrament" is not a legal command.
+Incrementing date to 03/01/2154
+Date is 03/01/2154
