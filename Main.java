@@ -193,7 +193,7 @@ public class Main {
         String input1FileName = "prog1-2.txt";
         String input2FileName = "prog1-2.txt";
         String output1FileName = "prog1-output1.txt";
-        String testOutputFileName = "test-Output.txt";
+        String testOutputFileName = "test-Output2.txt";
 
         // int variable to keep track of the current MyDate object.
         int current = -1;
@@ -317,8 +317,26 @@ public class Main {
                         // following the "setday" command is not an Integer, then throw a NumberFormatException.
                     else if(command.equals("setday")){
                         String temp = input1.next();
-                        if(Character.isDigit(Integer.parseInt(temp))){
-                            myDateObjects.get(current).setDay(Integer.parseInt(input1.next()));
+                        if(allDigits(temp)){
+                            myDateObjects.get(current).setDay(Integer.parseInt(temp));
+                        } else{
+                            throw new NumberFormatException("For input string: \"" + temp + "\"");
+                        }
+                    }
+
+                    // else if block used to set the value for month if the "command" is equal to "setmonth". If the
+                        // String following the "setmonth" command is not an Integer,
+                        // then throw a NumberFormatException.
+                    else if(command.equals("setmonth")){
+                        String temp = input1.next();
+                        if(allDigits(temp)){
+                            int month = Integer.parseInt(temp);
+
+                            if((month >= 1) && (month <= 12)){
+                                myDateObjects.get(current).setMonth(month);
+                            } else{
+                                throw new IllegalDateException("The month " + month + " is out of range");
+                            }
                         } else{
                             throw new NumberFormatException("For input string: \"" + temp + "\"");
                         }
@@ -369,5 +387,20 @@ public class Main {
                 testOutput.close();
             }
         }
+    }
+
+
+    private static boolean allDigits(String str){
+
+        // boolean variable to find out if the passed in string contains only integers.
+        boolean allDigits = true;
+
+        for(int i = 0; i < str.length(); i++){
+            if(!Character.isDigit(str.charAt(i))){
+                allDigits = false;
+            }
+        }
+
+        return allDigits;
     }
 }
